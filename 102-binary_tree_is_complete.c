@@ -1,7 +1,6 @@
 #include "binary_trees.h"
 
 size_t binary_tree_height(const binary_tree_t *tree);
-size_t binary_tree_nodes(const binary_tree_t *tree);
 int binary_tree_is_perfect(const binary_tree_t *tree);
 
 /**
@@ -39,7 +38,6 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 /**
  * binary_tree_height - Measures the height of a binary tree.
  * @tree: A pointer to the root node of the tree to measure the height.
- *
  * Return: If tree is NULL, your function must return 0, else return height.
  */
 size_t binary_tree_height(const binary_tree_t *tree)
@@ -49,32 +47,15 @@ size_t binary_tree_height(const binary_tree_t *tree)
 		size_t l_counter = 0, r_counter = 0;
 
 		if (tree->left)
-			l_counter = 1 + binary_tree_height(tree->left);
-
+			l_counter = binary_tree_height(tree->left);
 		if (tree->right)
-			r_counter = 1 + binary_tree_height(tree->right);
+			r_counter = binary_tree_height(tree->right);
 
 		if (l_counter > r_counter)
-			return (l_counter);
-		return (r_counter);
+			return (l_counter + 1);
+		return (r_counter + 1);
 	}
 	return (0);
-}
-
-/**
- * binary_tree_nodes - counts the nodes with at least 1 child in a binary tree
- * @tree: pointer to the root node of the tree to count the nodes in
- * Return: number of nodes with at least 1 child in a binary tree
- */
-size_t binary_tree_nodes(const binary_tree_t *tree)
-{
-	size_t gauche, droite;
-
-	if (!tree || (tree && !tree->left && !tree->right))
-		return (0);
-	gauche = binary_tree_nodes(tree->left);
-	droite = binary_tree_nodes(tree->right);
-	return (1 + gauche + droite);
 }
 
 /**
@@ -86,13 +67,14 @@ size_t binary_tree_nodes(const binary_tree_t *tree)
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
 	if (!tree)
-		return (0);
+		return (1);
+
 	if (!tree->left && !tree->right)
 		return (1);
-	else if (!tree->left || !tree->right)
+	if (!tree->left || !tree->right)
 		return (0);
-
-	if (binary_tree_nodes(tree->left) == binary_tree_nodes(tree->right))
+	if (binary_tree_height(tree->left) ==
+		binary_tree_height(tree->right))
 	{
 		if (binary_tree_is_perfect(tree->left) &&
 			binary_tree_is_perfect(tree->right))
