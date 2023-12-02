@@ -13,10 +13,10 @@ bst_t *bst_search(const bst_t *tree, int value)
 
 	for (ptr = (bst_t *)tree; ptr;)
 	{
-		if (ptr->n > value)
-			ptr = ptr->left;
-		else if (ptr->n == value)
+		if (ptr->n == value)
 			return (ptr);
+		else if (ptr->n > value)
+			ptr = ptr->left;
 		else
 			ptr = ptr->right;
 	}
