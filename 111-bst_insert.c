@@ -8,37 +8,37 @@
  */
 bst_t *bst_insert(bst_t **tree, int value)
 {
-    bst_t *ptr;
+	bst_t *ptr;
 
-    if (!tree)
-        return (NULL);
-    if (!(*tree))
-    {
-        *tree = (bst_t *)binary_tree_node(NULL, value);
-        return (*tree);
-    }
-    for (ptr = *tree; ptr;)
-    {
-        if (ptr->n == value)
-            break;
-        if (ptr->n > value)
-        {
-            if (!ptr->left)
-            {
-                ptr->left = (bst_t *)binary_tree_node(ptr, value);
-                return (ptr->left);
-            }
-            ptr = ptr->left;
-        }
-        else if (ptr->n < value)
-        {
-            if (!ptr->right)
-            {
-                ptr->right = (bst_t *)binary_tree_node(ptr, value);
-                return (ptr->right);
-            }
-            ptr = ptr->right;
-        }
-    }
-    return (NULL);
+	if (!tree)
+		return (NULL);
+	if (!(*tree))
+	{
+		*tree = (bst_t *)binary_tree_node(NULL, value);
+		return (*tree);
+	}
+	for (ptr = *tree; ptr;)
+	{
+		if (ptr->n == value)
+			break;
+		if (ptr->n > value)
+		{
+			if (!ptr->left)
+			{
+				ptr->left = (bst_t *)binary_tree_node(ptr, value);
+				return (ptr->left);
+			}
+			ptr = ptr->left;
+		}
+		else if (ptr->n < value)
+		{
+			if (!ptr->right)
+			{
+				ptr->right = (bst_t *)binary_tree_node(ptr, value);
+				return (ptr->right);
+			}
+			ptr = ptr->right;
+		}
+	}
+	return (NULL);
 }
